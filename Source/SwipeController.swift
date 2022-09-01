@@ -26,7 +26,7 @@ protocol SwipeControllerDelegate: class {
     
 }
 
-class SwipeController: NSObject {
+public class SwipeController: NSObject {
     
     weak var swipeable: (UIView & Swipeable)?
     weak var actionsContainerView: UIView?
@@ -343,7 +343,7 @@ class SwipeController: NSObject {
 }
 
 extension SwipeController: UIGestureRecognizerDelegate {
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer == tapGestureRecognizer {
             if UIAccessibility.isVoiceOverRunning {
                 scrollView?.hideSwipeables()
@@ -459,7 +459,7 @@ extension SwipeController: SwipeActionsViewDelegate {
         }
     }
     
-    func hideSwipe(animated: Bool, completion: ((Bool) -> Void)? = nil) {
+    public func hideSwipe(animated: Bool, completion: ((Bool) -> Void)? = nil) {
         guard var swipeable = self.swipeable, let actionsContainerView = self.actionsContainerView else { return }
         guard swipeable.state == .left || swipeable.state == .right else { return }
         guard let actionView = swipeable.actionsView else { return }
@@ -491,7 +491,7 @@ extension SwipeController: SwipeActionsViewDelegate {
         swipeable.actionsView?.visibleWidth = abs(actionsContainerView.frame.minX)
     }
     
-    func showSwipe(orientation: SwipeActionsOrientation, animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+    public func showSwipe(orientation: SwipeActionsOrientation, animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
         setSwipeOffset(.greatestFiniteMagnitude * orientation.scale * -1,
                        animated: animated,
                        completion: completion)
